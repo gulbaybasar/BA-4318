@@ -1,0 +1,40 @@
+﻿import pandas as pd
+import numpy as np
+import os
+
+
+# filename = os.getcwd() + '/Guess Me.csv'
+filename = os.getcwd() + '\\Guess Me.csv'
+
+
+df = pd.read_csv(filename, sep=';')
+
+
+df_credit = df[df['Payment']=="Credit"]
+df_cof_cre = df_credit[df_credit['Order']=="Coffee"]
+
+
+df_cash = df[df['Payment']=="Cash"]
+df_cof_cash = df_cash[df_cash['Order']=="Coffee"]
+
+
+kpmg1 = (df_cof_cash[df_cof_cash['Company']=="KPMG"]['Quantity'].sum(axis=0)).astype(str)
+kpmg2 = (df_cof_cre[df_cof_cre['Company']=="KPMG"]['Quantity'].sum(axis=0)).astype(str)
+
+
+ey1 = (df_cof_cash[df_cof_cash['Company']=="EY"]['Quantity'].sum(axis=0)).astype(str)
+ey2 = (df_cof_cre[df_cof_cre['Company']=="EY"]['Quantity'].sum(axis=0)).astype(str)
+
+
+deloite1 = (df_cof_cash[df_cof_cash['Company']=="Deloite & Touche"]['Quantity'].sum(axis=0)).astype(str)
+deloite2 = (df_cof_cre[df_cof_cre['Company']=="Deloite & Touche"]['Quantity'].sum(axis=0)).astype(str)
+
+
+pwc1 = (df_cof_cash[df_cof_cash['Company']=="PWC"]['Quantity'].sum(axis=0)).astype(str)
+pwc2 = (df_cof_cre[df_cof_cre['Company']=="PWC"]['Quantity'].sum(axis=0)).astype(str)
+
+
+print("From KPMG " + kpmg1 + " people have bought stuff on discount and paid in cash, also assistants got " + kpmg2 + " servings of coffee on credit.")
+print("From EY " + ey1 + " people have bought stuff on discount and paid in cash, also assistants got " + ey2 + " servings of coffee on credit.")
+print("From Deloite & Touche " + deloite1 + " people have bought stuff on discount and paid in cash, also assistants got " + deloite2 + " servings of coffee on credit.")
+print("From PWC " + pwc1 + " people have bought stuff on discount and paid in cash, also assistants got " + pwc2 + " servings of coffee on credit.")
